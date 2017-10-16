@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HenCoderImitate</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="ruguo">即刻</string>
+    <string name="boohee">薄荷</string>
+    <string name="xiaomi">小米</string>
+    <string name="flipboard">Flipboard</string>
+</resources>
