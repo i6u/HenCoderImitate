@@ -11,6 +11,7 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 
 import com.mymeek.hencoderimitate.R;
 
@@ -44,7 +45,8 @@ public class Flipboard extends View {
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.maps);
 
         animator = ObjectAnimator.ofInt(this, "degree", 0, 360);
-        animator.setDuration(5000);
+        animator.setDuration(1500);
+        animator.setInterpolator(new LinearInterpolator());
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
     }
@@ -60,14 +62,25 @@ public class Flipboard extends View {
         int x = centerX - bitmapWidth / 2;
         int y = centerY - bitmapHeight / 2;
 
+        canvas.save();
+        canvas.translate(centerX, centerY);
+        camera.save();
+
+        camera.rotateZ(degree);
+        camera.rotateY(-45);
+        camera.rotateZ(-degree);
+
+        camera.applyToCanvas(canvas);
+
+        camera.restore();
+        canvas.translate(-centerX, -centerY);
+        canvas.drawBitmap(bitmap, x, y, paint);
+        canvas.restore();
 
         canvas.save();
         canvas.translate(centerX, centerY);
         canvas.rotate(-degree);
-        camera.save();
-        camera.rotateY(-45);
-        camera.applyToCanvas(canvas);
-        camera.restore();
+        canvas.clipRect(-centerX, -centerY, 0, centerY);
         canvas.rotate(degree);
         canvas.translate(-centerX, -centerY);
         canvas.drawBitmap(bitmap, x, y, paint);
