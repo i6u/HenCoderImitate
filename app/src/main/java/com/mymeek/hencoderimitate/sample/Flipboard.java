@@ -67,8 +67,8 @@ public class Flipboard extends View {
         camera.save();
 
         camera.rotateZ(degree);
-        camera.rotateY(-45);
-        camera.rotateZ(-degree);
+        //camera.rotateY(-45);
+        //camera.rotateZ(-degree);
 
         camera.applyToCanvas(canvas);
 
@@ -83,7 +83,7 @@ public class Flipboard extends View {
         canvas.clipRect(-centerX, -centerY, 0, centerY);
         canvas.rotate(degree);
         canvas.translate(-centerX, -centerY);
-        canvas.drawBitmap(bitmap, x, y, paint);
+        //canvas.drawBitmap(bitmap, x, y, paint);
         canvas.restore();
 
     }
